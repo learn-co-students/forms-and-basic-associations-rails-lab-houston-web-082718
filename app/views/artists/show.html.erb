@@ -1,2 +1,12 @@
-<h1>Artists#show</h1>
-<p>Find me in app/views/artists/show.html.erb</p>
+<h2><%= @artist.name %></h2>
+
+<h3><%= pluralize(@artist.song_count, 'song') %></h3>
+<ul>
+  <% @artist.songs.each do |song| %>
+    <li><%= link_to song.title, song_path(song) %></li>
+  <% end %>
+
+<div><a href='/artists/<%= @artist.id %>/edit'> Edit</a> <a href='/artists'> All Artist</a></div>
+<%= form_tag artist_path(@artist.id), method: "delete" do %>
+  <%= submit_tag "Delete #{@artist.name}" %>
+<% end %>
